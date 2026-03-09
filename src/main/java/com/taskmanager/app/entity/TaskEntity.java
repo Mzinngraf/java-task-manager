@@ -14,6 +14,8 @@ public class TaskEntity {
     private String title ;
     @Column(name = "description")
     private String description ;
+    @Column(name = "priority")
+    private Integer priority ;
 
     public void setId(Integer id){
         this.id = id;
@@ -22,6 +24,14 @@ public class TaskEntity {
 
     public Integer getId() {
         return id;
+    }
+    public void setPriority(Integer priority){
+        this.priority = priority;
+
+    }
+
+    public Integer getPriority() {
+        return priority;
     }
     public void setTitle(String title){
         this.title = title;

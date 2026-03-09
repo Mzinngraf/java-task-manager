@@ -1,5 +1,6 @@
 package com.taskmanager.app.controller;
 
+import com.taskmanager.app.data.EditPriorityData;
 import com.taskmanager.app.data.NewTaskData;
 import com.taskmanager.app.data.TaskInfoData;
 import com.taskmanager.app.service.TaskService;
@@ -28,4 +29,15 @@ public class TaskController {
         List<TaskInfoData> list = taskService.list();
         return ResponseEntity.ok(list);
     }
+    @DeleteMapping (path = "/{id}")
+    public ResponseEntity <Void> delete(@PathVariable("id") Integer id){
+        taskService.delete(id);
+        return ResponseEntity.ok().build();
+    }
+    @PatchMapping(path = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity <Void> edit(@PathVariable("id") Integer id, @RequestBody EditPriorityData request){
+        taskService.edit(id, request);
+        return ResponseEntity.ok().build();
+    }
+
 }
