@@ -1,6 +1,7 @@
 package com.taskmanager.app.controller;
 
 import com.taskmanager.app.data.EditPriorityData;
+import com.taskmanager.app.data.FoundTaskData;
 import com.taskmanager.app.data.NewTaskData;
 import com.taskmanager.app.data.TaskInfoData;
 import com.taskmanager.app.service.TaskService;
@@ -39,5 +40,10 @@ public class TaskController {
         taskService.edit(id, request);
         return ResponseEntity.ok().build();
     }
+    @GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<FoundTaskData> find (@PathVariable("id") Integer id){
 
+        FoundTaskData foundTaskData = taskService.find(id);
+        return ResponseEntity.ok(foundTaskData);
+    }
 }

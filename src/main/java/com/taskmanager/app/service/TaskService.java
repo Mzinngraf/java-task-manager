@@ -1,6 +1,7 @@
 package com.taskmanager.app.service;
 
 import com.taskmanager.app.data.EditPriorityData;
+import com.taskmanager.app.data.FoundTaskData;
 import com.taskmanager.app.data.NewTaskData;
 import com.taskmanager.app.data.TaskInfoData;
 import com.taskmanager.app.entity.TaskEntity;
@@ -44,6 +45,14 @@ public class TaskService {
         TaskEntity taskEntity = byId.get();
         taskEntity.setPriority(editPriorityData.priority());
         taskRepository.save(taskEntity);
-
+    }
+    public FoundTaskData find(Integer id){
+        Optional<TaskEntity> found = taskRepository.findById(id);
+        if (found.isPresent()) {
+            TaskEntity taskEntity = found.get();
+            FoundTaskData foundTaskData = new FoundTaskData(taskEntity.getTitle(), taskEntity.getDescription(), taskEntity.getPriority());
+            return foundTaskData;
+        }
+        return  null;
     }
 }
